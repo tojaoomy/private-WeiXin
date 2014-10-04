@@ -5,8 +5,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 /**
  * 请求消息基类（普通用户 -> 公众帐号）
  * 
- * 因为微信协议规定xml格式第一个字母大写，所以违反了Java字段小写的规范
- * 
  * @author 何剑
  * @date 2014-09-19
  */

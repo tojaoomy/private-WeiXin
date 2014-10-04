@@ -11,9 +11,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("xml")
 public class ImageMessageRequest extends BaseMessageRequest {  
-    // 图片链接  
+    // 图片链接
     @XStreamAlias("PicUrl")
     private String picUrl;  
+    
+    //图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
+    @XStreamAlias("MediaId")
+    private String mediaId;
        
     public String getPicUrl() {  
         return picUrl;  
@@ -21,5 +25,13 @@ public class ImageMessageRequest extends BaseMessageRequest {
        
     public void setPicUrl(String picUrl) {  
         this.picUrl = picUrl;  
-    }  
+    }
+
+	public String getMediaId() {
+		return mediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		this.mediaId = mediaId;
+	}  
 }

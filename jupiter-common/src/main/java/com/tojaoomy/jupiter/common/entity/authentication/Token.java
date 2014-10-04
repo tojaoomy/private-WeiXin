@@ -1,11 +1,3 @@
-/**
- *
- * Copyright (C), 2013-2013, 上海汽车集团股份有限公司
- * FileName : Token.java
- * Author : 何剑
- * Date : 2014年9月21日
- * 
- */
 package com.tojaoomy.jupiter.common.entity.authentication;
 
 /**

@@ -1,11 +1,3 @@
-/**
- *
- * Copyright (C), 2013-2013, 上海汽车集团股份有限公司
- * FileName : Video.java
- * Author : 何剑
- * Date : 2014年9月19日
- * 
- */
 package com.tojaoomy.jupiter.common.entity.response;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;

@@ -17,8 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SignUtil {
     // 与配置信息中的Token要一致
-    //@Value(value="www.chexiang.com") 静态变量使用@value特性不可行，一直返回Null
-    private static String token = "chexiang" ;
+    private static String token = "hejian" ;
 
     /**
      * 验证签名

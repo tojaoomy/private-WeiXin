@@ -1,7 +1,11 @@
 package com.tojaoomy.jupiter.common.util;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +30,9 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  * @date 2014-09-19 
  */
 public class MessageUtil {  
+	
+	/** 在request中设置的属性，在线程结束之前需要removeAttribute(MessageUtil.REQUEST_ATTRIBUTE) */
+	public static final String REQUEST_ATTRIBUTE = "request.attribute.xml.content";
        
     /** 
      * 返回消息类型：文本 
@@ -116,24 +123,57 @@ public class MessageUtil {
        
         // 从request中取得输入流  
         InputStream inputStream = request.getInputStream();  
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        StringBuffer buffer = new StringBuffer();
+        String line;
+        try {
+            while((line = bufferedReader.readLine()) != null){
+                buffer.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally{
+        	if(bufferedReader != null){
+        		try {
+					bufferedReader.close();
+					 // 释放资源  
+			        inputStream.close();  
+			        inputStream = null;  
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+        	}
+        }
         // 读取输入流  
         SAXReader reader = new SAXReader();  
-        Document document = reader.read(inputStream);  
+//      Document document = reader.read(inputStream);  
+        StringReader stringReader = new StringReader(buffer.toString());
+        Document document = reader.read(stringReader);  
         // 得到xml根元素  
         Element root = document.getRootElement();  
         // 得到根元素的所有子节点  
         List<Element> elementList = root.elements();  
-       
+        recursive(elementList, map);
+        request.setAttribute(REQUEST_ATTRIBUTE, buffer.toString());
+        //针对有子元素，采用递推实现
         // 遍历所有子节点  
-        for (Element e : elementList)  
-            map.put(e.getName(), e.getText());  
-       
-        // 释放资源  
-//        inputStream.close();  
-//        inputStream = null;  
-       
+//        for (Element e : elementList)  
+//            map.put(e.getName(), e.getText());  
+        stringReader.close();
         return map;  
     }  
+    
+    @SuppressWarnings("unchecked")
+	private static void recursive(List<Element> elementList,Map<String, String> map){
+    	// 遍历所有子节点  
+    	 for (Element e : elementList){
+    		 map.put(e.getName(), e.getText());  
+    		 //还有子元素就递归
+    		 if(e.elements().size() > 0){
+    			 recursive(e.elements(),map);
+    		 }
+    	 }
+    }
        
        
     /** 

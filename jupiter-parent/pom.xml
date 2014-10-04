@@ -219,7 +219,7 @@
 				<artifactId>dom4j</artifactId>
 				<version>1.6.1</version>
 			</dependency>
-			
+
 			<!-- Log -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -236,7 +236,7 @@
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>1.7.7</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>net.sf.json</groupId>
 				<artifactId>json-lib-2.4-jdk15</artifactId>
@@ -282,6 +282,24 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>5.0.2.Final</version>
+			</dependency>
+
+			<!-- JSON -->
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-datatype-json-org</artifactId>
+				<version>1.8.0</version>
+				<type>bundle</type>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.3</version>
 			</dependency>
 
 			<!-- junit -->
@@ -337,9 +355,9 @@
 		</repository>
 	</repositories>
 	<modules>
-
-	<module>../jupiter-api</module>
-	<module>../jupiter-common</module>
-	<module>../jupiter-service</module>
+		<module>../jupiter-api</module>
+		<module>../jupiter-common</module>
+		<module>../jupiter-service</module>
+		<module>../jupiter-web</module>
 	</modules>
 </project>

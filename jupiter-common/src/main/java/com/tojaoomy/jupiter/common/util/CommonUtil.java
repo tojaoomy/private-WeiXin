@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -125,5 +127,19 @@ public class CommonUtil {
             }
         }
         return accessToken;
+    }
+    
+    /**
+     * URL编码 utf-8
+     * @param url 原始url
+     * @return	编码后的url
+     */
+    public static String encodeURL(String url) {
+    	try {
+			return URLEncoder.encode(url, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+    	return url;
     }
 }
